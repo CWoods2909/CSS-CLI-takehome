@@ -12,10 +12,10 @@
 ## Main functionality
 There are three files that make up the CLI program. The CSV parser itself which parses the file and puts all the data into an
 array of objects. Our helper file is where we will find the filtering functions, and movieQueries is the bulk of our application.
-This is where it processes our requests made in the command line. Argv was really handy to use here, made accessing the information provided by the user really easy to grab and work with. Once we have our input and its stored on our argv object we loop through our filters. This was originally a long list of conditionals(left in so you could see my train of thought) but found a cleaner more DRY way of doing it after a refactor. Conditions, their corresponding function and arguments are put into an array of objects. We loop over the array and check if that condition is present, if it is then we pass the filtered movies, and spread the rest of the necessary arguments. Once we make it through we sort the data by IMDB rating from greatest to least. Finally, we check what the output format and file is. If none provided we use the defaults.
+This is where it processes our requests made in the command line. Argv was really handy to use here, made accessing the information provided by the user really easy to grab and work with. Once we have our input and its stored on our argv object we loop through our filters. This was originally a long list of conditionals but found a cleaner more DRY way of doing it after a refactor. This made my code much easier to modify and add more functions if I needed to. Filters holds the conditions, corresponding function and arguments. Filters is an array of objects. We loop over the array and check if that condition is present, if it is then we pass the filtered movies, and spread the rest of the necessary arguments. Once we make it through we sort the data by IMDB rating from greatest to least. Finally, we check what the output format and file is. If none are provided we use the defaults.
 
 ## Handy Commands
-To get a full list of commands to run simply input `node movieQueries.js .help`
+To get a full list of commands `node movieQueries.js .help`
 
 ## Helpful tips
 To make a successful query you will need a few things, always start with `node` followed by the name of our main file `movieQueries.js`.
