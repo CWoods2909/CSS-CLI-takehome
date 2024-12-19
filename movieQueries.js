@@ -1,4 +1,3 @@
-import fs from "fs";
 import yargs from "yargs";
 import { parseCsvFile } from "./csvParser.js";
 import {
@@ -11,12 +10,8 @@ import {
     filterByGross,
     topTenMoviesByRating,
     findHiddenGems,
-    formatter
 } from "./helpersFuncs.js";
-
-
-import  Table  from "cli-table3";
-import { parse } from "json2csv";
+import { tableFormat, csvFormat, jsonFormat } from "./outputFormat.js";
 
 const argv = yargs(process.argv.slice(2))
     .option("input", {
@@ -62,7 +57,7 @@ async function processMovies() {
             { condition: argv.actor, func: filterByActor, args: [argv.actor] },
             { condition: argv.runtimeMoreThan, func: filterByRuntime, args: [argv.runtimeMoreThan, "more-than"] },
             { condition: argv.runtimeLessThan, func: filterByRuntime, args: [argv.runtimeLessThan, "less-than"] },
-            { condition: argv.grossMin, func: filterByGross, args: [argv.grossMin, "min"] },
+            { condition: argv.grossMin, func: filterByGross, args: [argv.grossMin, "min"] }, 
             { condition: argv.grossMax, func: filterByGross, args: [argv.grossMax, "max"] },
             { condition: argv.topTenRating, func: topTenMoviesByRating, args:[argv.topTen]},
             { condition: argv.findHiddenGem, func: findHiddenGems, args: [argv.ratingAbove, argv.votesBelow]}
@@ -79,41 +74,13 @@ async function processMovies() {
 
         // Output the results in the requested format, if none given we display as a table in terminal.
         if (argv.outputFormat === "table") {
-            const table = new Table({
-                head: ["Title", "Year", "Rating", "Genre", "Runtime", "Gross", "Director", "Number of Votes"],
-                colWidths: [30, 10, 10, 15, 10, 20],
-            });
+            tableFormat(filteredMovies);
 
-            filteredMovies.forEach((movie) => {
-                table.push([
-                    movie.series_title,
-                    movie.released_year,
-                    movie.imdb_rating,
-                    movie.genre,
-                    movie.runtime,
-                    movie.gross ? formatter.format(movie.gross) : "$",
-                    movie.director,
-                    movie.no_of_votes
-                ]);
-            });
-
-            console.log(table.toString());
         } else if (argv.outputFormat === "json") {
-            const jsonOutput = JSON.stringify(filteredMovies, null, 2);
-            if (argv.outputFile) {
-                fs.writeFileSync(argv.outputFile, jsonOutput);
-                console.log(`Results saved to ${argv.outputFile}`);
-            } else {
-                console.log(jsonOutput);
-            }
+            jsonFormat(filteredMovies, argv);
+
         } else if (argv.outputFormat === "csv") {
-            const csvOutput = parse(filteredMovies);
-            if (argv.outputFile) {
-                fs.writeFileSync(argv.outputFile, csvOutput);
-                console.log(`Results saved to ${argv.outputFile}`);
-            } else {
-                console.log(csvOutput);
-            }
+            csvFormat(filteredMovies, argv);
         }
     } catch (error) {
         console.error("Error processing movies:", error);

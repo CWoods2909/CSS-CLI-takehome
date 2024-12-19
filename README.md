@@ -11,9 +11,9 @@
 - fs: *Handles file input/output* 
 
 ## Main functionality
-There are three files that make up the CLI program. The CSV parser itself which parses the file and puts all the data into an
-array of objects. Our helper file is where we will find the filtering functions, and movieQueries is the bulk of our application.
-This is where it processes our requests made in the command line. Argv was really handy to use here, made accessing the information provided by the user really easy to grab and work with. Once we have our input and its stored on our argv object we loop through our filters. This was originally a long list of conditionals but found a cleaner more DRY way of doing it after a refactor. This made my code much easier to modify and add more functions if I needed to. Filters holds the conditions, corresponding function and arguments. Filters is an array of objects. We loop over the array and check if that condition is present, if it is then we pass the filtered movies, and spread the rest of the necessary arguments. Once we make it through we sort the data by IMDB rating from greatest to least. Finally, we check what the output format and file is. If none are provided we use the defaults.
+There are four files that make up the CLI program. The CSV parser itself which parses the file and puts all the data into an
+array of objects. Our helper funcs file is where we will find the filtering functions, movieQueries is the bulk of our application, and finally output format.
+MovieQueries is where it processes our requests made in the command line. Argv was really handy to use here, made accessing the information provided by the user really easy to grab and work with. Once we have our input and its stored on our argv object we loop through our filters. This was originally a long list of conditionals but found a cleaner more DRY way of doing it after a refactor. This made my code much easier to modify and add more functions if I needed to. Filters holds the conditions, corresponding function and arguments. Filters is an array of objects. We loop over the array and check if that condition is present, if it is then we pass the filtered movies, and spread the rest of the necessary arguments. Once we make it through we sort the data by IMDB rating from greatest to least. Finally, we check what the output format and file is and pass to our output format file. If none are provided we use the defaults.
 
 ## Handy Commands
 To get a full list of commands `node movieQueries.js .help`
