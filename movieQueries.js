@@ -70,17 +70,21 @@ async function processMovies() {
         });
 
         // Sort the results by IMDB rating in descending order
-        filteredMovies.sort((a, b) => b.imdb_rating - a.imdb_rating);
-
-        // Output the results in the requested format, if none given we display as a table in terminal.
-        if (argv.outputFormat === "table") {
-            tableFormat(filteredMovies);
-
-        } else if (argv.outputFormat === "json") {
-            jsonFormat(filteredMovies, argv);
-
-        } else if (argv.outputFormat === "csv") {
-            csvFormat(filteredMovies, argv);
+        if(filteredMovies.length > 1){
+            filteredMovies.sort((a, b) => b.imdb_rating - a.imdb_rating);
+            
+            // Output the results in the requested format, if none given we display as a table in terminal.
+            if (argv.outputFormat === "table") {
+                tableFormat(filteredMovies);
+                
+            } else if (argv.outputFormat === "json") {
+                jsonFormat(filteredMovies, argv);
+                
+            } else if (argv.outputFormat === "csv") {
+                csvFormat(filteredMovies, argv);
+            }
+        }else {
+            console.log("No movies found with the given criteria.");
         }
     } catch (error) {
         console.error("Error processing movies:", error);
