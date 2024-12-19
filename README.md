@@ -1,6 +1,7 @@
 ## To download this project
 - Git clone
 - Don't forget to npm install before running anything
+- Check out handy commands and tips down below
 
 ## Downloaded tools and libraries
 - Csv-parser: *To parse the CSV file* [Docs](https://www.npmjs.com/package/csv-parser)
