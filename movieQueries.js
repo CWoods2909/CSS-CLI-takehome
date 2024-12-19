@@ -46,11 +46,12 @@ const argv = yargs(process.argv.slice(2))
     .option("find-hidden-gem", {describe: "Find movies above a specified rating and below a specified vote count."})
     .help()
     .argv;
-
+    
 async function processMovies() {
     try {
         const movies = await parseCsvFile(argv.input);
         let filteredMovies = movies;
+
         const filters = [
             { condition: argv.yearAfter, func: filterByYear, args: [argv.yearAfter, "after"]},
             { condition: argv.yearBefore, func: filterByYear, args: [argv.yearBefore, "before"]},

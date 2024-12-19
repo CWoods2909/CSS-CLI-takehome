@@ -10,7 +10,7 @@ export function filterByYear(movies, year, operator) {
         return false;
     });
 };
-//
+//Filter by genre
 export function filterByGenre(movies, genre) {
     return movies.filter((movie) =>
         movie.genre.toLowerCase().includes(genre.toLowerCase())
@@ -83,7 +83,7 @@ export function topTenMoviesByRating(movies){
     return highestRated;
 };
 
-//hidden gems, default score of 8 and votes below 100,000
+//hidden gems finder
 export function findHiddenGems(movies, ratingMin, votesMax){
     if(typeof ratingMin !== "number" || typeof votesMax !== "number") return console.error("Please provide a rating and number of votes to find hidden gems.");
     
@@ -92,9 +92,9 @@ export function findHiddenGems(movies, ratingMin, votesMax){
     })
     
     return hiddenGemMovies
-}
+};
 
-//Formater to make gross profit look more human readable
+//Formatter to make gross profit look more human readable
 export const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',

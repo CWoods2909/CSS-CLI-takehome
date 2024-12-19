@@ -14,7 +14,6 @@ export function parseCsvFile(filePath) {
                     row.imdb_rating = parseFloat(row.imdb_rating);
                     row.meta_score = parseInt(row.meta_score);
                     row.gross = parseInt(row.gross.replace(/,/g, "").trim());
-                    // row.no_of_votes = parseInt(row.no_of_votes.replace(/,/g, ''), 10);
 
                     movies.push(row);
                 } catch (error) {
