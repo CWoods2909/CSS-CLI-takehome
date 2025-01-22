@@ -74,7 +74,7 @@ export function filterByGross(movies, gross, operator) {
 
 //top ten by rating
 export function topTenMoviesByRating(movies){
-    const sorted = movies.sort((a, b) => b.imdb_rating - a.imdb_rating);
+    const sorted = movies.sort((a, b) => b.imdb_rating - a.imdb_rating):
     const highestRated = [];
 
     for(let i = 0; i < 10; i++){
@@ -91,7 +91,7 @@ export function findHiddenGems(movies, ratingMin, votesMax){
         return movie.imdb_rating >= ratingMin && movie.no_of_votes <= votesMax
     })
     
-    return hiddenGemMovies
+    return hiddenGemMovies;
 };
 
 //Formatter to make gross profit look more human readable
